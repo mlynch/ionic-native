@@ -362,6 +362,29 @@ export class BLE extends AwesomeCordovaNativePlugin {
   }
 
   /**
+   * Request connection priority
+   * Supported Platforms: Android
+   * @usage
+   *```
+   * 		BLE.requestConnectionPriority('12:34:56:78:9A:BC', 'high').then(() => {
+   *       console.log('Connection priority set');
+   *     }, error => {
+   * 			console.log('Could no set connection priority');
+   * 		});
+   * ```
+   * @param {string} deviceId UUID or MAC address of the peripheral
+   * @param {string} priority Connection priority can be one of:
+   * 		"balanced" - (https://developer.android.com/reference/android/bluetooth/BluetoothGatt#CONNECTION_PRIORITY_BALANCED)
+   * 		"high" - (https://developer.android.com/reference/android/bluetooth/BluetoothGatt#CONNECTION_PRIORITY_HIGH)
+   * 		"low" - (https://developer.android.com/reference/android/bluetooth/BluetoothGatt#CONNECTION_PRIORITY_LOW_POWER)
+   * @returns {Promise<any>} Returns a Promise.
+   */
+  @Cordova()
+  requestConnectionPriority(deviceId: string, priority: string): Promise<any> {
+    return;
+  }
+  
+  /**
    * Refresh Device Cache
    * This method may fix a issue of old cached services and characteristics.
    * NOTE Since this uses an undocumented API it's not guaranteed to work.
