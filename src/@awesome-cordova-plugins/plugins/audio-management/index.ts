@@ -9,12 +9,12 @@ import { Cordova, AwesomeCordovaNativePlugin, Plugin } from '@awesome-cordova-pl
  *
  * @usage
  * ```typescript
- * constructor(public audioman: AudioManagement) { }
+ * constructor(public audioManagement: AudioManagement) { }
  *
  * ...
  *
  * setAudioMode() {
- *  this.audioman.setAudioMode(AudioManagement.AudioMode.NORMAL)
+ *  this.audioManagement.setAudioMode(AudioMode.NORMAL)
  *    .then(() => {
  *     console.log('Device audio mode is now NORMAL');
  *    })
@@ -24,8 +24,8 @@ import { Cordova, AwesomeCordovaNativePlugin, Plugin } from '@awesome-cordova-pl
  * }
  *
  * getAudioMode() {
- *  this.audioman.getAudioMode()
- *    .then((value: AudioManagement.AudioModeReturn) => {
+ *  this.audioManagement.getAudioMode()
+ *    .then((value: AudioModeReturn) => {
  *     console.log('Device audio mode is ' + value.label + ' (' + value.audioMode + ')');
  *    })
  *    .catch((reason) => {
@@ -47,36 +47,36 @@ import { Cordova, AwesomeCordovaNativePlugin, Plugin } from '@awesome-cordova-pl
   platforms: ['Android']
 })
 @Injectable()
-export class Appsflyer extends AwesomeCordovaNativePlugin {
+export class AudioManagement extends AwesomeCordovaNativePlugin {
   /**
    * Sets the `AudioManagement.AudioMode` for the device.
    *
-   * @param {AudioManagement.AudioMode} mode the device can be set to: Silent, Normal, Vibrate
+   * @param {AudioMode} mode the device can be set to: Silent, Normal, Vibrate
    * @returns {Promise<void>}
    */
   @Cordova({
     successIndex: 1,
     errorIndex: 2
   })
-  setAudioMode(mode: AudioManagement.AudioMode): Promise<void> {
+  setAudioMode(mode: AudioMode): Promise<void> {
     return;
   }
 
   /**
-   * Gets the current `AudioManagement.AudioMode` of the device. Thenable returns an object with
+   * Gets the current `AudioMode` of the device. Thenable returns an object with
    * `label` and `audioMode` values.
    *
-   * @returns {Promise<AudioManagement.AudioModeReturn>}
+   * @returns {Promise<AudioModeReturn>}
    */
   @Cordova()
-  getAudioMode(): Promise<AudioManagement.AudioModeReturn> {
+  getAudioMode(): Promise<AudioModeReturn> {
     return;
   }
 
   /**
-   * Sets the specified `AudioManagement.VolumeType` for the device with the value from `volume`.
+   * Sets the specified `VolumeType` for the device with the value from `volume`.
    *
-   * @param {AudioManagement.VolumeType} type the `AudioManagement.VolumeType` to set
+   * @param {VolumeType} type the `VolumeType` to set
    * @param {number} volume the volume value
    * @returns {Promise<void>}
    */
@@ -84,58 +84,56 @@ export class Appsflyer extends AwesomeCordovaNativePlugin {
     successIndex: 2,
     errorIndex: 3
   })
-  setVolume(type: AudioManagement.VolumeType, volume: number): Promise<void> {
+  setVolume(type: VolumeType, volume: number): Promise<void> {
     return;
   }
 
   /**
-   * Gets the specified `AudioManagement.VolumeType`'s `volume`. Thenable returns an object with
+   * Gets the specified `VolumeType`'s `volume`. Thenable returns an object with
    * a numeric property for volume, `volume`.
    *
-   * @param {AudioManagement.VolumeType} type the `AudioManagement.VolumeType` to get
+   * @param {VolumeType} type the `VolumeType` to get
    * @returns {Promise<{volume: number}>}
    */
   @Cordova({
     successIndex: 1,
     errorIndex: 2
   })
-  getVolume(type: AudioManagement.VolumeType): Promise<{ volume: number }> {
+  getVolume(type: VolumeType): Promise<{ volume: number }> {
     return;
   }
 
   /**
-   * Gets the specified `AudioManagement.VolumeType`'s maximum `volume`. Thenable returns an
+   * Gets the specified `VolumeType`'s maximum `volume`. Thenable returns an
    * object with a numeric property, `maxVolume`.
    *
-   * @param {AudioManagement.VolumeType} type the `AudioManagement.VolumeType` to get
+   * @param {VolumeType} type the `VolumeType` to get
    * @returns {Promise<{maxVolume: number}>}
    */
   @Cordova({
     successIndex: 1,
     errorIndex: 2
   })
-  getMaxVolume(type: AudioManagement.VolumeType): Promise<{ maxVolume: number }> {
+  getMaxVolume(type: VolumeType): Promise<{ maxVolume: number }> {
     return;
   }
 }
 
 
-export namespace AudioManagement {
-  export enum AudioMode {
-    SILENT = 0,
-    VIBRATE,
-    NORMAL
-  }
+export enum AudioMode {
+  SILENT = 0,
+  VIBRATE,
+  NORMAL
+}
 
-  export enum VolumeType {
-    RING = 0,
-    MUSIC,
-    NOTIFICATION,
-    SYSTEM
-  }
+export enum VolumeType {
+  RING = 0,
+  MUSIC,
+  NOTIFICATION,
+  SYSTEM
+}
 
-  export interface AudioModeReturn {
-    audioMode: AudioManagement.AudioMode;
-    label: string;
-  }
+export interface AudioModeReturn {
+  audioMode: AudioMode;
+  label: string;
 }
