@@ -15,6 +15,18 @@ export interface FacebookLoginResponse {
   };
 }
 
+export interface FacebookLimitedLoginResponse {
+  status: string;
+
+  authResponse: {
+    authenticationToken: string;
+
+    nonce: string;
+
+    userID: string;
+  };
+}
+
 /**
  * @name Facebook
  * @description
@@ -226,10 +238,11 @@ export class Facebook extends AwesomeCordovaNativePlugin {
    * ```
    *
    * @param {string[]}  permissions List of [permissions](https://developers.facebook.com/docs/facebook-login/limited-login/permissions) this app has upon logging in.
-   * @returns {Promise<FacebookLoginResponse>} Returns a Promise that resolves with a status object if login succeeds, and rejects if login fails.
+   * @param {string}    nonce       Nonce to create the configuration with.
+   * @returns {Promise<FacebookLimitedLoginResponse>} Returns a Promise that resolves with a status object if login succeeds, and rejects if login fails.
    */
   @Cordova()
-  loginWithLimitedTracking(permissions: string[]): Promise<FacebookLoginResponse> {
+  loginWithLimitedTracking(permissions: string[], nonce: string): Promise<FacebookLimitedLoginResponse> {
     return;
   }
 
