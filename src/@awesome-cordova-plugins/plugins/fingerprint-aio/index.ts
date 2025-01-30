@@ -157,6 +157,22 @@ export interface FingerprintSecretOptions extends FingerprintOptions {
   invalidateOnEnrollment?: boolean;
 }
 
+export interface FingerprintAvailableOptions {
+  /**
+  * (Android): If true will only return success if Class 3 (BIOMETRIC_STRONG) Biometrics are enrolled on the device. 
+  * It is reccomended you use this if planning on using the registerBiometricSecret and loadBiometricSecret methods.
+  */
+  requireStrongBiometrics: boolean;
+
+  /**
+  * (iOS): If true checks if backup authentication option is available, e.g. passcode. 
+  * Default: false, which means check for biometrics only.
+  * 
+  * @default false
+  */
+  allowBackup?: boolean;
+}
+
 /**
  * @name Fingerprint AIO
  * @description
@@ -209,6 +225,7 @@ export interface FingerprintSecretOptions extends FingerprintOptions {
  * @interfaces
  * FingerprintOptions
  * FingerprintSecretOptions
+ * FingerprintAvailableOptions
  */
 @Plugin({
   pluginName: 'FingerprintAIO',
@@ -223,11 +240,14 @@ export class FingerprintAIO extends AwesomeCordovaNativePlugin {
   /**
    * Check if fingerprint authentication is available
    *
+   * @param {FingerprintAvailableOptions} options Options for platform specific fingerprint API
    * @returns {Promise<BIOMETRIC_TYPE>} Returns a promise with result which depends on device and os.
    * iPhone X will return 'face' other Android or iOS devices will return 'finger' Android P+ will return 'biometric'
    */
-  @Cordova()
-  isAvailable(): Promise<BIOMETRIC_TYPE> {
+  @Cordova({
+    callbackOrder: 'reverse'
+  })
+  isAvailable(options: FingerprintAvailableOptions): Promise<BIOMETRIC_TYPE> {
     return;
   }
 
