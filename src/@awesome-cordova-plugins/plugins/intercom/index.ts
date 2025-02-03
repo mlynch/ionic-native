@@ -59,6 +59,22 @@ export class Intercom extends AwesomeCordovaNativePlugin {
   }
 
   /**
+   * Determines if there is currently a user logged in.
+   */
+  isUserLoggedIn(): Promise<boolean> {
+    return;
+  }
+
+  /**
+   * Fetches the user attribtues of the currently logged in user.
+   *
+   * return A user registration object.
+   */
+  fetchLoggedInUserAttributes(): Promise<any> {
+    return;
+  }
+
+  /**
    * Set `hash` string if you are using Identity Verification for your Intercom workspace.
    * @note This should be called before any user login takes place.
    *
