@@ -323,7 +323,7 @@ export class LaunchNavigator extends AwesomeCordovaNativePlugin {
    */
   @Cordova({
     successIndex: 1,
-    errorIndex: 2
+    errorIndex: 2,
   })
   navigate(destination: string | number[], options?: LaunchNavigatorOptions): Promise<any> {
     return;
@@ -447,4 +447,16 @@ export class LaunchNavigator extends AwesomeCordovaNativePlugin {
    */
   @Cordova({ sync: true })
   userSelect(destination: string | number[], options: LaunchNavigatorOptions): void {}
+
+  /**
+   * Sets the Google API key for Android.
+   *
+   * @param api_key {string} - Google API key.
+   * Note: This function is also available on iOS but it does nothing. This is to keep the interface consistent between the platforms
+   * @returns {Promise<void>}
+   */
+  @Cordova({ platforms: ['Android', 'iOS'] })
+  setApiKey(api_key: string): Promise<void> {
+    return;
+  }
 }
